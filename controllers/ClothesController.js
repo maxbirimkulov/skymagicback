@@ -86,7 +86,8 @@ export const create =  async (req, res) => {
             colors: req.body.colors,
             sizes: req.body.sizes,
             category: req.body.category,
-            inStock: req.body.inStock
+            inStock: req.body.inStock,
+            gender: req.body.gender
         })
         const clothes = await doc.save()
         res.json(clothes)

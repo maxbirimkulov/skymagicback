@@ -9,7 +9,7 @@ import {
     clothesCreateValidation
 } from './validations/validations.js'
 import checkAuth from "./utils/checkAuth.js";
-import {register, getMe, login, getAllUser} from './controllers/UserController.js'
+import {register, getMe, login, getAllUser, handleFavorites} from './controllers/UserController.js'
 import {create, getAll,getOne, remove, update} from './controllers/ClothesController.js'
 import handleValidatorErrors from "./utils/handleValidatorErrors.js";
 
@@ -41,6 +41,7 @@ const PORT = 4444
 
 server.post('/auth/login', loginValidation,handleValidatorErrors, login)
 server.post('/auth/register', registerValidation,handleValidatorErrors,  register )
+server.patch('/users/favorites/:id', handleFavorites)
 server.get('/auth/me', checkAuth ,getMe )
 server.get('/users', getAllUser)
 

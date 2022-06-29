@@ -2,6 +2,8 @@
 import bcrypt from "bcrypt";
 import UserModel from "../models/User.js";
 import jwt from "jsonwebtoken";
+import ClothesModel from "../models/Clothes.js";
+import {update} from "./ClothesController.js";
 
 
 export const register = async (req, res) => {
@@ -122,4 +124,37 @@ export const getAllOrders = async (req, res) => {
 }
 
 
+export const handleFavorites = async (req, res) => {
+    try {
+        const userId = req.params.id
 
+        console.log(userId)
+
+        UserModel.findByIdAndUpdate({
+            _id: userId
+        },  {
+            favorites: req.body.favorites,
+        }, {
+            returnDocument: 'after',
+        }, (err, doc) => {
+            if (err) {
+                console.log(err)
+                return  res.status(500).json({
+                    message: 'Не удалось добавить в избранное'
+                })
+            }
+            if (!doc) {
+                return res.status(404).json({
+                    message: 'Юзер не найден'
+                })
+            }
+            res.json(doc)
+        })
+
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({
+            message: 'Не удалось добавить в избранное'
+        })
+    }
+}
