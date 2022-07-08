@@ -16,7 +16,7 @@ import {
     getAllUser,
     handleFavorites,
     handleOrders,
-    getAllOrders
+    getAllOrders, handleStatus
 } from './controllers/UserController.js'
 import {create, getAll,getOne, remove, update} from './controllers/ClothesController.js'
 import handleValidatorErrors from "./utils/handleValidatorErrors.js";
@@ -53,6 +53,7 @@ server.patch('/users/favorites/:id', handleFavorites)
 server.get('/auth/me', checkAuth ,getMe )
 server.get('/users', getAllUser)
 server.patch('/users/:id', handleOrders)
+server.patch('/users/status/:id', handleStatus)
 server.get('/orders', getAllOrders)
 
 server.post('/upload',  upload.single('image'), (req, res) => {

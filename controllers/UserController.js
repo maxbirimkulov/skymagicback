@@ -160,6 +160,8 @@ export const handleFavorites = async (req, res) => {
 }
 
 
+
+
 export const handleOrders = async (req, res) => {
     try {
         const userId = req.params.id
@@ -190,6 +192,46 @@ export const handleOrders = async (req, res) => {
         console.log(err)
         res.status(500).json({
             message: 'Не удалось совершить покупку'
+        })
+    }
+}
+
+export const handleStatus = async (req, res) => {
+    try {
+        const userId = req.params.id
+
+        const user = await UserModel.findById({_id: userId})
+
+        UserModel.findByIdAndUpdate({
+            _id: userId
+        },  {
+            orders: user.orders.map((item) => {
+                if (item.number === req.body.number){
+                    return {...item, status: req.body.status}
+                } else {
+                    return item
+                }
+            } ),
+        }, {
+            returnDocument: 'after',
+        }, (err, doc) => {
+            if (err) {
+                console.log(err)
+                return  res.status(500).json({
+                    message: 'Не удалось подтвердить покупку'
+                })
+            }
+            if (!doc) {
+                return res.status(404).json({
+                    message: 'Юзер не найден'
+                })
+            }
+            res.json(doc)
+        })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({
+            message: 'Не удалось подтвердить покупку'
         })
     }
 }
