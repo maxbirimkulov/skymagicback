@@ -1,7 +1,7 @@
 import express from 'express'
 import multer from 'multer'
 import cors from 'cors'
-
+import TelegramApi from "node-telegram-bot-api";
 import mongoose from 'mongoose'
 import {
     registerValidation,
@@ -20,6 +20,8 @@ import {
 } from './controllers/UserController.js'
 import {create, getAll,getOne, remove, update} from './controllers/ClothesController.js'
 import handleValidatorErrors from "./utils/handleValidatorErrors.js";
+import UserModel from "./models/User.js";
+
 
 mongoose.connect('mongodb+srv://aloha:aloha3134@cluster0.gqhxp.mongodb.net/aloha?retryWrites=true&w=majority')
     .then(() => console.log('Mongo DB успешно запущен'))
@@ -43,6 +45,42 @@ server.use(express.json())
 server.use(cors())
 server.use('/uploads', express.static('uploads'))
 
+const token = '5562531972:AAHr6GKdxd6jtJmew9Agnwl0qpMUkebz0BY'
+
+
+export const bot = new TelegramApi(token, {polling: true})
+
+
+bot.on('callback_query', async (msg) => {
+    const number = msg.message.text.slice(16);
+    const userId = msg.data.split(' ')[1]
+    const status = msg.data.split(' ')[0]
+
+    const user = await UserModel.findById({_id:userId })
+
+    UserModel.findByIdAndUpdate({
+        _id: userId
+    },  {
+        orders: user.orders.map((item) => {
+            if (item.number === number){
+                return {...item, status: status}
+            } else {
+                return item
+            }
+        } ),
+    }, {
+        returnDocument: 'after',
+    }, (err, doc) => {
+        if (err) {
+            console.log(err)
+            return bot.sendMessage(530135171, 'Не удалось подтвердить покупку')
+        }
+        if (!doc) {
+            return bot.sendMessage(530135171, 'Юзер не найден')
+        }
+        bot.sendMessage(530135171, `Успешно изменен статус на ${status} у заказа под номером ${number}`)
+    })
+})
 
 const PORT = 4444
 
