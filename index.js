@@ -82,7 +82,7 @@ bot.on('callback_query', async (msg) => {
     })
 })
 
-const PORT = 4444
+const PORT = process.env.PORT || 4444
 
 
 server.post('/auth/login', loginValidation,handleValidatorErrors, login)
