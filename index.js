@@ -28,7 +28,7 @@ mongoose.connect('mongodb+srv://aloha:aloha3134@cluster0.gqhxp.mongodb.net/aloha
     .catch((err) =>  console.log('Ошибка при запуске Mongo DB ' ,err))
 
 
-const server = express()
+const index = express()
 
 const storage = multer.diskStorage({
     destination: (_, __, cb) => {
@@ -41,9 +41,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage})
 
-server.use(express.json())
-server.use(cors())
-server.use('/uploads', express.static('uploads'))
+index.use(express.json())
+index.use(cors())
+index.use('/uploads', express.static('uploads'))
 
 const token = '5562531972:AAHr6GKdxd6jtJmew9Agnwl0qpMUkebz0BY'
 
@@ -82,31 +82,31 @@ bot.on('callback_query', async (msg) => {
     })
 })
 
-const PORT =  4444
+const PORT = process.env.PORT || 4444
 
 
-server.post('/auth/login', loginValidation,handleValidatorErrors, login)
-server.post('/auth/register', registerValidation,handleValidatorErrors,  register )
-server.patch('/users/favorites/:id', handleFavorites)
-server.get('/auth/me', checkAuth ,getMe )
-server.get('/users', getAllUser)
-server.patch('/users/:id', handleOrders)
-server.patch('/users/status/:id', handleStatus)
-server.get('/orders', getAllOrders)
+index.post('/auth/login', loginValidation,handleValidatorErrors, login)
+index.post('/auth/register', registerValidation,handleValidatorErrors,  register )
+index.patch('/users/favorites/:id', handleFavorites)
+index.get('/auth/me', checkAuth ,getMe )
+index.get('/users', getAllUser)
+index.patch('/users/:id', handleOrders)
+index.patch('/users/status/:id', handleStatus)
+index.get('/orders', getAllOrders)
 
-server.post('/upload',  upload.single('image'), (req, res) => {
+index.post('/upload',  upload.single('image'), (req, res) => {
     res.json({
         url: `/uploads/${req.file.originalname}`,
     })
 })
 
-server.get('/clothes', getAll )
-server.get('/clothes/:id', getOne )
-server.delete('/clothes/:id', remove )
-server.patch('/clothes/:id', clothesCreateValidation, handleValidatorErrors,   update )
-server.post('/clothes', clothesCreateValidation, handleValidatorErrors, create )
+index.get('/clothes', getAll )
+index.get('/clothes/:id', getOne )
+index.delete('/clothes/:id', remove )
+index.patch('/clothes/:id', clothesCreateValidation, handleValidatorErrors,   update )
+index.post('/clothes', clothesCreateValidation, handleValidatorErrors, create )
 
-server.listen(PORT, (err) => {
+index.listen(PORT, (err) => {
     if (err){
        return  console.log('Произошла ошибка', err)
     }
