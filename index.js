@@ -6,7 +6,7 @@ import mongoose from 'mongoose'
 import {
     registerValidation,
     loginValidation,
-    clothesCreateValidation
+    clothesCreateValidation, addOrderValidation
 } from './validations/validations.js'
 import checkAuth from "./utils/checkAuth.js";
 import {
@@ -21,6 +21,7 @@ import {
 import {create, getAll,getOne, remove, update} from './controllers/ClothesController.js'
 import handleValidatorErrors from "./utils/handleValidatorErrors.js";
 import UserModel from "./models/User.js";
+import {createOrder} from "./controllers/OrderController.js";
 
 
 mongoose.connect('mongodb+srv://aloha:aloha3134@cluster0.gqhxp.mongodb.net/aloha?retryWrites=true&w=majority')
@@ -105,6 +106,9 @@ index.get('/clothes/:id', getOne )
 index.delete('/clothes/:id', remove )
 index.patch('/clothes/:id', clothesCreateValidation, handleValidatorErrors,   update )
 index.post('/clothes', clothesCreateValidation, handleValidatorErrors, create )
+
+index.post('/orders', addOrderValidation, createOrder )
+
 
 index.listen(PORT, (err) => {
     if (err){
