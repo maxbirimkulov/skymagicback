@@ -9,9 +9,12 @@ export const registerValidation = [
     body('email', 'Неверный формат почты').isEmail(),
     body('password', 'Пароль должен быть минимум 5 символов').isLength({min: 5}),
     body('login', 'Укажите Логин').isLength({min: 3}),
-    body('phone', 'Укажите номер телефона').isLength({min: 12}),
-    body('orders','Неверный список заказов').optional().isString(),
-    body('favorites','Неверный список избранных').optional().isString(),
+    body('name', 'Укажите Имя').isLength({min: 3}),
+    body('surname', 'Укажите Фамилие').isLength({min: 3}),
+    body('gender', 'Укажите пол'),
+    body('age', 'Укажите возраст').isNumeric(),
+    // body('married', 'Укажите семейное положение').isBoolean(),
+    body('phone', 'Укажите номер телефона').isLength({min: 12})
 ]
 
 export const clothesCreateValidation = [

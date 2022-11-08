@@ -24,7 +24,7 @@ import UserModel from "./models/User.js";
 import {createOrder} from "./controllers/OrderController.js";
 
 
-mongoose.connect('mongodb+srv://aloha:aloha3134@cluster0.gqhxp.mongodb.net/aloha?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://maxbirimkulov:123456goldfish@goldfish.kln5rqv.mongodb.net/?retryWrites=true&w=majority')
     .then(() => console.log('Mongo DB успешно запущен'))
     .catch((err) =>  console.log('Ошибка при запуске Mongo DB ' ,err))
 

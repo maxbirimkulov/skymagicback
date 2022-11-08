@@ -17,8 +17,13 @@ export const register = async (req, res) => {
             email: req.body.email,
             phone: req.body.phone,
             login : req.body.login,
-            favorites: req.body.favorites,
             orders: req.body.orders,
+            name: req.body.name,
+            surname: req.body.surname,
+            age: req.body.age,
+            // married: req.body.married,
+            // children: req.body.children,
+            gender: req.body.gender,
             passwordHash : hash
         })
 
