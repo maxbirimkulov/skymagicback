@@ -6,7 +6,7 @@ import mongoose from 'mongoose'
 import {
     registerValidation,
     loginValidation,
-    clothesCreateValidation, addOrderValidation
+    clothesCreateValidation, addOrderValidation, loginAdminValidation, registerAdminValidation
 } from './validations/validations.js'
 import checkAuth from "./utils/checkAuth.js";
 import {
@@ -22,6 +22,7 @@ import {create, getAll,getOne, remove, update} from './controllers/ClothesContro
 import handleValidatorErrors from "./utils/handleValidatorErrors.js";
 import UserModel from "./models/User.js";
 import {createOrder} from "./controllers/OrderController.js";
+import {getAllUserAdmin, getMeAdmin, loginAdmin, registerAdmin} from "./controllers/UserAdminController.js";
 
 
 mongoose.connect('mongodb+srv://maxbirimkulov:123456goldfish@goldfish.kln5rqv.mongodb.net/?retryWrites=true&w=majority')
@@ -88,12 +89,17 @@ const PORT = process.env.PORT || 4444
 
 index.post('/auth/login', loginValidation,handleValidatorErrors, login)
 index.post('/auth/register', registerValidation,handleValidatorErrors,  register )
+index.post('/auth/admin/login', loginAdminValidation,handleValidatorErrors, loginAdmin)
+index.post('/auth/admin/register', registerAdminValidation,handleValidatorErrors,  registerAdmin )
 index.patch('/users/favorites/:id', handleFavorites)
 index.get('/auth/me', checkAuth ,getMe )
+index.get('/auth/admin/me', checkAuth ,getMeAdmin )
 index.get('/users', getAllUser)
+index.get('/users/admin', getAllUserAdmin)
 index.patch('/users/:id', handleOrders)
 index.patch('/users/status/:id', handleStatus)
 index.get('/orders', getAllOrders)
+
 
 index.post('/upload',  upload.single('image'), (req, res) => {
     res.json({

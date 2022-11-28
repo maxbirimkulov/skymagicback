@@ -6,7 +6,6 @@ import {bot} from "../index.js";
 
 
 
-
 export const register = async (req, res) => {
     try {
         const password = req.body.password
@@ -84,7 +83,6 @@ export const login = async (req, res) => {
     }
 }
 
-
 export const getMe = async (req,res) => {
     try {
         const user = await UserModel.findById(req.userId)
@@ -103,19 +101,21 @@ export const getMe = async (req,res) => {
     }
 }
 
-
 export const getAllUser = async (req, res) => {
     try {
         const users = await UserModel.find();
-        res.json(users)
+        const usersLength = await UserModel.find();
+        res.json({
+            users,
+            dataLength: usersLength.length
+        })
     } catch (err) {
         console.log(err)
         res.status(500).json({
-            message: 'Не удалось получить все  статьи'
+            message: 'Не удалось получить всех пользователей'
         })
     }
 }
-
 
 export const getAllOrders = async (req, res) => {
     try {
@@ -129,7 +129,6 @@ export const getAllOrders = async (req, res) => {
         })
     }
 }
-
 
 export const handleFavorites = async (req, res) => {
     try {
@@ -165,9 +164,6 @@ export const handleFavorites = async (req, res) => {
         })
     }
 }
-
-
-
 
 export const handleOrders = async (req, res) => {
     try {
