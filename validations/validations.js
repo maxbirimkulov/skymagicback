@@ -49,3 +49,16 @@ export const addOrderValidation = [
     body('orders', 'Сделайте покупку').isArray(),
 ]
 
+export const addBannerValidation = [
+    body('title', 'Введите название баннера').isString(),
+    body('text', 'Введите текст баннера').isString(),
+    body('images', 'Введите картинку баннера').isString(),
+    body('branch', 'Выберите филиал баннера').isString()
+]
+export const addVacanciesValidation = [
+    body('title', 'Введите название вакансии').isString(),
+    body('description', 'Введите описание вакансии').isString(),
+    body('responsibilities', 'Введите требования вакансии').isArray(),
+    body('requirement', 'Введите обязанности вакансии').isArray()
+]
+

@@ -6,7 +6,12 @@ import mongoose from 'mongoose'
 import {
     registerValidation,
     loginValidation,
-    clothesCreateValidation, addOrderValidation, loginAdminValidation, registerAdminValidation
+    clothesCreateValidation,
+    addOrderValidation,
+    loginAdminValidation,
+    registerAdminValidation,
+    addBannerValidation,
+    addVacanciesValidation
 } from './validations/validations.js'
 import checkAuth from "./utils/checkAuth.js";
 import {
@@ -23,6 +28,14 @@ import handleValidatorErrors from "./utils/handleValidatorErrors.js";
 import UserModel from "./models/User.js";
 import {createOrder} from "./controllers/OrderController.js";
 import {getAllUserAdmin, getMeAdmin, loginAdmin, registerAdmin} from "./controllers/UserAdminController.js";
+import {createBanner, getAllBanners, getOneBanner, removeBanner, updateBanner} from "./controllers/BannerController.js";
+import {
+    createVacancies,
+    getAllVacancies,
+    getOneVacancies,
+    removeVacancies,
+    updateVacancies
+} from "./controllers/VacanciesController.js";
 
 
 mongoose.connect('mongodb+srv://maxbirimkulov:123456goldfish@goldfish.kln5rqv.mongodb.net/?retryWrites=true&w=majority')
@@ -91,6 +104,18 @@ index.post('/auth/login', loginValidation,handleValidatorErrors, login)
 index.post('/auth/register', registerValidation,handleValidatorErrors,  register )
 index.post('/auth/admin/login', loginAdminValidation,handleValidatorErrors, loginAdmin)
 index.post('/auth/admin/register', registerAdminValidation,handleValidatorErrors,  registerAdmin )
+index.get('/banners', getAllBanners)
+index.get('/banners/:id', getOneBanner)
+index.post('/banners', addBannerValidation,createBanner)
+index.patch('/banners/:id',addBannerValidation, updateBanner)
+index.delete('/banners/:id', removeBanner)
+
+index.get('/vacancies', getAllVacancies)
+index.get('/vacancies/:id', getOneVacancies)
+index.post('/vacancies', addVacanciesValidation,createVacancies)
+index.patch('/vacancies/:id',addVacanciesValidation, updateVacancies)
+index.delete('/vacancies/:id', removeVacancies)
+
 index.patch('/users/favorites/:id', handleFavorites)
 index.get('/auth/me', checkAuth ,getMe )
 index.get('/auth/admin/me', checkAuth ,getMeAdmin )
