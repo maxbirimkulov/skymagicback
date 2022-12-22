@@ -14,6 +14,10 @@ const VacanciesSchema = new mongoose.Schema({
     },
     requirement : {
         type: Array
+    } ,
+    branch : {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true,

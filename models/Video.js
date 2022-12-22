@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-const GallerySchema = new mongoose.Schema({
-    imageUrl: {
+const VideoSchema = new mongoose.Schema({
+    videoUrl: {
         type: String,
         required: true
     },
@@ -12,4 +12,4 @@ const GallerySchema = new mongoose.Schema({
     timestamps: true,
 })
 
-export default  mongoose.model('Gallery', GallerySchema)
+export default  mongoose.model('Video', VideoSchema)

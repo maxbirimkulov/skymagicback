@@ -59,6 +59,7 @@ export const addVacanciesValidation = [
     body('title', 'Введите название вакансии').isString(),
     body('description', 'Введите описание вакансии').isString(),
     body('responsibilities', 'Введите требования вакансии').isArray(),
-    body('requirement', 'Введите обязанности вакансии').isArray()
+    body('requirement', 'Введите обязанности вакансии').isArray(),
+    body('branch', 'Введите филиал вакансии')
 ]
 

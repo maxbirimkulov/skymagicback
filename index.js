@@ -37,6 +37,7 @@ import {
     updateVacancies
 } from "./controllers/VacanciesController.js";
 import {createGallery, getAllGallery, getOneGallery, removeGallery} from "./controllers/GalleryController.js";
+import {createVideo, getAllVideo, getOneVideo, removeVideo} from "./controllers/VideoController.js";
 
 
 mongoose.connect('mongodb+srv://maxbirimkulov:123456goldfish@goldfish.kln5rqv.mongodb.net/?retryWrites=true&w=majority')
@@ -115,6 +116,11 @@ index.get('/gallery', getAllGallery)
 index.get('/gallery/:id', getOneGallery)
 index.post('/gallery', createGallery)
 index.delete('/gallery/:id', removeGallery)
+
+index.get('/video', getAllVideo)
+index.get('/video/:id', getOneVideo)
+index.post('/video', createVideo)
+index.delete('/video/:id', removeVideo)
 
 index.get('/vacancies', getAllVacancies)
 index.get('/vacancies/:id', getOneVacancies)

@@ -3,7 +3,7 @@ import BannerModel from '../models/Banner.js'
 export const getAllBanners = async (req, res) => {
     try {
          const banners = await BannerModel.find({
-             branch: new RegExp(req.query.title, 'i')
+             branch: new RegExp(req.query.branch, 'i')
            });
         res.json(banners)
     } catch (err) {
@@ -104,7 +104,8 @@ export const updateBanner =  async (req, res) => {
         }, {
             title: req.body.title,
             text : req.body.text,
-            images : req.body.images
+            images : req.body.images,
+            branch : req.body.branch
         })
         res.json({success: true})
     } catch (err) {

@@ -2,7 +2,9 @@ import VacanciesModel from '../models/Vacancies.js'
 
 export const getAllVacancies = async (req, res) => {
     try {
-         const vacancies = await VacanciesModel.find();
+         const vacancies = await VacanciesModel.find({
+             branch: new RegExp(req.query.branch, 'i')
+         });
         res.json(vacancies)
     } catch (err) {
         console.log(err)
@@ -80,7 +82,8 @@ export const createVacancies =  async (req, res) => {
             title: req.body.title,
             description : req.body.description,
             responsibilities : req.body.responsibilities,
-            requirement : req.body.requirement
+            requirement : req.body.requirement,
+            branch : req.body.branch
 
         })
         const vacancies = await doc.save()
@@ -103,7 +106,8 @@ export const updateVacancies =  async (req, res) => {
             title: req.body.title,
             description : req.body.description,
             responsibilities : req.body.responsibilities,
-            requirement : req.body.requirement
+            requirement : req.body.requirement,
+            branch : req.body.branch
         })
         res.json({success: true})
     } catch (err) {

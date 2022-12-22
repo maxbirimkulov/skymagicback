@@ -77,7 +77,8 @@ export const removeGallery = async (req, res) => {
 export const createGallery =  async (req, res) => {
     try {
         const doc = new GalleryModel({
-            src: req.body.src
+            imageUrl: req.body.imageUrl,
+            text: req.body.text,
         })
         const gallery = await doc.save()
         res.json(gallery)
