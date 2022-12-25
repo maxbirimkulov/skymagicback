@@ -38,6 +38,9 @@ import {
 } from "./controllers/VacanciesController.js";
 import {createGallery, getAllGallery, getOneGallery, removeGallery} from "./controllers/GalleryController.js";
 import {createVideo, getAllVideo, getOneVideo, removeVideo} from "./controllers/VideoController.js";
+import {createReview, getAllReview, getOneReview, removeReview} from "./controllers/ReviewController.js";
+import {createRequest, getAllRequest, getOneRequest, removeRequest} from "./controllers/RequestController.js";
+import {createClick, getAllClick, getOneClick, removeClick} from "./controllers/ClickController.js";
 
 
 mongoose.connect('mongodb+srv://maxbirimkulov:123456goldfish@goldfish.kln5rqv.mongodb.net/?retryWrites=true&w=majority')
@@ -128,6 +131,21 @@ index.post('/vacancies', addVacanciesValidation,createVacancies)
 index.patch('/vacancies/:id',addVacanciesValidation, updateVacancies)
 index.delete('/vacancies/:id', removeVacancies)
 
+index.get('/review', getAllReview)
+index.get('/review/:id', getOneReview)
+index.post('/review', createReview)
+index.delete('/review/:id', removeReview)
+
+index.get('/request', getAllRequest)
+index.get('/request/:id', getOneRequest)
+index.post('/request', createRequest)
+index.delete('/request/:id', removeRequest)
+
+index.get('/click', getAllClick)
+index.get('/click/:id', getOneClick)
+index.post('/click', createClick)
+index.delete('/click/:id', removeClick)
+
 index.patch('/users/favorites/:id', handleFavorites)
 index.get('/auth/me', checkAuth ,getMe )
 index.get('/auth/admin/me', checkAuth ,getMeAdmin )
@@ -135,6 +153,8 @@ index.get('/users', getAllUser)
 index.get('/users/admin', getAllUserAdmin)
 index.patch('/users/:id', handleOrders)
 index.patch('/users/status/:id', handleStatus)
+
+
 index.get('/orders', getAllOrders)
 
 
