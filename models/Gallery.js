@@ -7,6 +7,10 @@ const GallerySchema = new mongoose.Schema({
     },
     text: {
         type: String
+    },
+    branch: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true,

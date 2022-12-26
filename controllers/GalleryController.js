@@ -2,7 +2,9 @@ import GalleryModel from '../models/Gallery.js'
 
 export const getAllGallery = async (req, res) => {
     try {
-         const gallery = await GalleryModel.find();
+         const gallery = await GalleryModel.find({
+                 branch: new RegExp(req.query.branch, 'i')
+             });
         res.json(gallery)
     } catch (err) {
         console.log(err)
@@ -79,6 +81,7 @@ export const createGallery =  async (req, res) => {
         const doc = new GalleryModel({
             imageUrl: req.body.imageUrl,
             text: req.body.text,
+            branch: req.body.branch
         })
         const gallery = await doc.save()
         res.json(gallery)
