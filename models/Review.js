@@ -8,6 +8,14 @@ const ReviewSchema = new mongoose.Schema({
     text: {
         type: String,
         required: true
+    },
+    branch: {
+        type: String,
+        required: true
+    },
+    rating: {
+        type: Number,
+        required: true
     }
 }, {
     timestamps: true,

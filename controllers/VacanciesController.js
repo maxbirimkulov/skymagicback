@@ -83,7 +83,8 @@ export const createVacancies =  async (req, res) => {
             description : req.body.description,
             responsibilities : req.body.responsibilities,
             requirement : req.body.requirement,
-            branch : req.body.branch
+            salary : req.body.salary,
+            graph : req.body.graph
 
         })
         const vacancies = await doc.save()
@@ -107,7 +108,8 @@ export const updateVacancies =  async (req, res) => {
             description : req.body.description,
             responsibilities : req.body.responsibilities,
             requirement : req.body.requirement,
-            branch : req.body.branch
+            salary : req.body.salary,
+            graph : req.body.graph
         })
         res.json({success: true})
     } catch (err) {

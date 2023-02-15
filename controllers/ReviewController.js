@@ -78,7 +78,9 @@ export const createReview =  async (req, res) => {
     try {
         const doc = new ReviewModel({
             name: req.body.name,
-            text : req.body.text
+            text : req.body.text,
+            branch : req.body.branch,
+            rating : req.body.rating
 
         })
         const review = await doc.save()

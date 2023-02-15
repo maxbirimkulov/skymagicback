@@ -15,7 +15,11 @@ const VacanciesSchema = new mongoose.Schema({
     requirement : {
         type: Array
     } ,
-    branch : {
+    salary:{
+        type: String,
+        required: true
+    },
+    graph:{
         type: String,
         required: true
     }

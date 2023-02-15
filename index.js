@@ -40,6 +40,8 @@ import {createVideo, getAllVideo, getOneVideo, removeVideo} from "./controllers/
 import {createReview, getAllReview, getOneReview, removeReview} from "./controllers/ReviewController.js";
 import {createRequest, getAllRequest, getOneRequest, removeRequest} from "./controllers/RequestController.js";
 import {createClick, getAllClick, getOneClick, removeClick} from "./controllers/ClickController.js";
+import {createEvent, getAllEvents, getOneEvent, removeEvent, updateEvent} from "./controllers/EventsController.js";
+import {createSales, getAllSales, getOneSales, removeSales, updateSales} from "./controllers/SalesController.js";
 
 
 mongoose.connect('mongodb+srv://maxbirimkulov:123456goldfish@goldfish.kln5rqv.mongodb.net/?retryWrites=true&w=majority')
@@ -112,7 +114,19 @@ index.get('/banners', getAllBanners)
 index.get('/banners/:id', getOneBanner)
 index.post('/banners', addBannerValidation,createBanner)
 index.patch('/banners/:id',addBannerValidation, updateBanner)
-index.delete('/banners/:id', removeBanner)
+
+
+index.get('/events', getAllEvents)
+index.get('/events/:id', getOneEvent)
+index.post('/events', createEvent)
+index.patch('/events/:id',updateEvent)
+index.delete('/events/:id', removeEvent)
+
+index.get('/sales', getAllSales)
+index.get('/sales/:id', getOneSales)
+index.post('/sales', createSales)
+index.patch('/sales/:id',updateSales)
+index.delete('/sales/:id', removeSales)
 
 index.get('/gallery', getAllGallery)
 index.get('/gallery/:id', getOneGallery)
