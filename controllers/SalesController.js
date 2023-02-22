@@ -79,7 +79,7 @@ export const createSales =  async (req, res) => {
         const doc = new SalesModel({
             title: req.body.title,
             description: req.body.description,
-            image: req.body.image,
+            images: req.body.images,
             descriptionFull: req.body.descriptionFull,
             date: req.body.date
 
@@ -103,7 +103,7 @@ export const updateSales =  async (req, res) => {
         }, {
             title: req.body.title,
             description: req.body.description,
-            image: req.body.image,
+            images: req.body.images,
             descriptionFull: req.body.descriptionFull,
             date: req.body.date
         })
