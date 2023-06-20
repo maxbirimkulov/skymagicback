@@ -5,7 +5,7 @@ const SalesSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    image: {
+    images: {
         type: String,
         required: true
     },
@@ -18,7 +18,7 @@ const SalesSchema = new mongoose.Schema({
         required: true,
     },
     date: {
-        type: String,
+         type: String,
         required: true,
     }
 }, {

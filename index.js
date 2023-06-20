@@ -114,6 +114,7 @@ index.get('/banners', getAllBanners)
 index.get('/banners/:id', getOneBanner)
 index.post('/banners', addBannerValidation,createBanner)
 index.patch('/banners/:id',addBannerValidation, updateBanner)
+index.delete('/banners/:id', removeBanner)
 
 
 index.get('/events', getAllEvents)
