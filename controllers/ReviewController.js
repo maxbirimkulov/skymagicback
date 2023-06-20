@@ -2,7 +2,9 @@ import ReviewModel from '../models/Review.js'
 
 export const getAllReview = async (req, res) => {
     try {
-         const review = await ReviewModel.find();
+         const review = await ReviewModel.find({
+             branch: new RegExp(req.query.branch, 'i')
+         });
         res.json(review)
     } catch (err) {
         console.log(err)

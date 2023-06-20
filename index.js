@@ -114,7 +114,11 @@ index.get('/banners', getAllBanners)
 index.get('/banners/:id', getOneBanner)
 index.post('/banners', addBannerValidation,createBanner)
 index.patch('/banners/:id',addBannerValidation, updateBanner)
+<<<<<<< HEAD
 index.delete('/banners/:id', removeBanner)
+=======
+index.patch('/banners/:id', removeBanner)
+>>>>>>> e3859ee42d30aad7585acd286545678a5b2957ce
 
 
 index.get('/events', getAllEvents)
