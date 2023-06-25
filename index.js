@@ -41,6 +41,12 @@ import {createRequest, getAllRequest, getOneRequest, removeRequest} from "./cont
 import {createClick, getAllClick, getOneClick, removeClick} from "./controllers/ClickController.js";
 import {createEvent, getAllEvents, getOneEvent, removeEvent, updateEvent} from "./controllers/EventsController.js";
 import {createSales, getAllSales, getOneSales, removeSales, updateSales} from "./controllers/SalesController.js";
+import {
+    createBottomBanner,
+    getAllBottomBanners,
+    getOneBottomBanner, removeBottomBanner,
+    updateBottomBanner
+} from "./controllers/BottomBannerController.js";
 
 
 mongoose.connect('mongodb+srv://smagicsite:Smagicsite@smagic.wtnnfw8.mongodb.net/')
@@ -77,6 +83,13 @@ index.get('/banners', getAllBanners)
 index.get('/banners/:id', getOneBanner)
 index.post('/banners', addBannerValidation,createBanner)
 index.patch('/banners/:id',addBannerValidation, updateBanner)
+
+
+index.get('/bottom/banners', getAllBottomBanners)
+index.get('/bottom/banners/:id', getOneBottomBanner)
+index.post('/bottom/banners',createBottomBanner)
+index.patch('/bottom/banners/:id', updateBottomBanner)
+index.patch('/bottom/banners/:id', removeBottomBanner)
 
 index.delete('/banners/:id', removeBanner)
 
